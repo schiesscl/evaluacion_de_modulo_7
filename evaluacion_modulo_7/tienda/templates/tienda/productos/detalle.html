@@ -1,0 +1,24 @@
+{% extends 'tienda/base.html' %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title">{{ object.nombre }}</h1>
+        </div>
+        <div class="card-body">
+            <p><strong>Descripción:</strong> {{ object.descripcion }}</p>
+            <p><strong>Precio:</strong> ${{ object.precio }}</p>
+            <p><strong>Categoría:</strong> <span class="badge bg-secondary">{{ object.categoria.nombre }}</span></p>
+            <p><strong>Etiquetas:</strong>
+                {% for etiqueta in object.etiquetas.all %}
+                    <span class="badge bg-info text-dark">{{ etiqueta.nombre }}</span>
+                {% empty %}
+                    Sin etiquetas.
+                {% endfor %}
+            </p>
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'tienda:lista_productos' %}" class="btn btn-primary">Volver a la lista</a>
+        </div>
+    </div>
+{% endblock %}
